@@ -1,9 +1,8 @@
 fastapi
 uvicorn
 sqlalchemy
-transformers
-torch
-pydantic
-huggingface-hub
+requests
+
+
 
 
