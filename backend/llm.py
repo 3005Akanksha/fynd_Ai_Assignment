@@ -1,21 +1,11 @@
-from transformers import pipeline
-
-generator = pipeline(
-    "text-generation",
-    model="TinyLlama/TinyLlama-1.1B-Chat-v1.0",
-    device=-1
-)
-
-def generate_ai_content(review):
-    prompt = f"""
-Review:
-{review}
-
-Return JSON only:
-{{"response":"...", "summary":"...", "action":"..."}}
-
-JSON:
+def generate_ai_content(review: str) -> str:
+    return """
+{
+  "response": "Thank you for sharing your feedback. We appreciate you taking the time to help us improve.",
+  "summary": "Customer expressed dissatisfaction with food quality.",
+  "action": "Review food preparation process and follow up with the customer."
+}
 """
-    output = generator(prompt, max_new_tokens=80, do_sample=False)
-    return output[0]["generated_text"]
+
+
 
