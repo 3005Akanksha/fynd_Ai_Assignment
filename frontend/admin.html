@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Admin Dashboard</title>
+</head>
+<body>
+
+  <h1>Admin Dashboard</h1>
+  <div id="reviews"></div>
+
+  <script>
+    async function loadReviews() {
+      const res = await fetch("http://localhost:8000/reviews");
+      const data = await res.json();
+
+      const container = document.getElementById("reviews");
+      container.innerHTML = "";
+
+      data.forEach(r => {
+        container.innerHTML += `
+          <hr/>
+          <p><b>Rating:</b> ${r.rating}</p>
+          <p><b>Review:</b> ${r.review}</p>
+          <p><b>Summary:</b> ${r.ai_summary}</p>
+          <p><b>Action:</b> ${r.ai_action}</p>
+        `;
+      });
+    }
+
+    loadReviews();
+    setInterval(loadReviews, 5000); // auto-refresh
+  </script>
+
+</body>
+</html>
+

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>User Feedback</title>
+</head>
+<body>
+
+  <h1>User Feedback</h1>
+
+  <label>Rating:</label>
+  <select id="rating">
+    <option value="1">1</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+    <option value="4">4</option>
+    <option value="5" selected>5</option>
+  </select>
+
+  <br /><br />
+
+  <textarea id="review" rows="6" cols="50"
+    placeholder="Write your review here"></textarea>
+
+  <br /><br />
+
+  <button onclick="submitReview()">Submit</button>
+
+  <h3>AI Response:</h3>
+  <p id="response"></p>
+
+  <script>
+    async function submitReview() {
+      const rating = document.getElementById("rating").value;
+      const review = document.getElementById("review").value;
+
+      const res = await fetch("http://localhost:8000/submit-review", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ rating, review })
+      });
+
+      const data = await res.json();
+      document.getElementById("response").innerText = data.ai_response;
+    }
+  </script>
+
+</body>
+</html>
+
