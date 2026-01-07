@@ -2,7 +2,3 @@ fastapi
 uvicorn
 sqlalchemy
 requests
-
-
-
-
